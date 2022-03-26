@@ -21,6 +21,8 @@ export const AddTodo = ({ onSubmit }) => {
         onChangeText={setValue}
         value={value}
         placeholder="Введите текст..."
+        autoCorrect={false}
+        autoCapitalize="none"
       />
       <Button title="Добавить" onPress={pressHadler} />
     </View>
