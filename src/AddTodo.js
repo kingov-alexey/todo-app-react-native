@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 
 export const AddTodo = ({ onSubmit }) => {
+  const [value, setValue] = useState('');
+
   const pressHadler = () => {
-    onSubmit('test todo');
+    if (value.trim()) {
+      onSubmit(value);
+      setValue('');
+    } else {
+      // error Ничего не введено
+      console.log('Ничего не введено');
+    }
   };
 
   return (
     <View style={styles.block}>
-      <TextInput style={styles.input} />
+      <TextInput
+        style={styles.input}
+        // onChangeText={text => setValue(text)}
+        onChangeText={setValue}
+        value={value}
+        placeholder="Введите текст..."
+      />
       <Button title="Добавить" onPress={pressHadler} />
     </View>
   );
