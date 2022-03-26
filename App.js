@@ -6,6 +6,7 @@ import { AddTodo } from './src/AddTodo';
 import { Todo } from './src/Todo';
 
 export default function App() {
+  //Стейт
   const [todos, setTodos] = useState([
     { id: 1, title: 'test1' },
     { id: 2, title: 'test2' },
@@ -18,6 +19,7 @@ export default function App() {
     { id: 9, title: 'test9' },
   ]);
 
+  //Добавление нового элемента
   const addTodo = title => {
     // const newTodo = {
     //   id: Date.now().toString(),
@@ -37,6 +39,11 @@ export default function App() {
     ]);
   };
 
+  //Удаление элемента
+  const removeTodo = id => {
+    setTodos(prev => prev.filter(todo => todo.id !== id));
+  };
+
   return (
     <View>
       <Navbar title="Todo App" />
@@ -45,7 +52,7 @@ export default function App() {
         <FlatList
           keyExtractor={item => item.id.toString()}
           data={todos}
-          renderItem={({ item }) => <Todo todo={item} />}
+          renderItem={({ item }) => <Todo todo={item} onRemove={removeTodo} />}
         />
       </View>
 
