@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, Alert } from 'react-native';
 
 export const AddTodo = ({ onSubmit }) => {
   const [value, setValue] = useState('');
@@ -9,8 +9,7 @@ export const AddTodo = ({ onSubmit }) => {
       onSubmit(value);
       setValue('');
     } else {
-      // error Ничего не введено
-      console.log('Ничего не введено');
+      Alert.alert('Значение поля ввода не может быть пустым');
     }
   };
 
