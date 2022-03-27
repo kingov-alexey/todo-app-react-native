@@ -7,7 +7,7 @@ import { TodoScreen } from './src/screens/TodoScreen';
 
 export default function App() {
   //стейт экранов
-  const [todoId, setTodoId] = useState(null);
+  const [todoId, setTodoId] = useState('2');
 
   //Стейт дел
   const [todos, setTodos] = useState([
@@ -74,8 +74,8 @@ export default function App() {
   return (
     <View>
       <Navbar title="Todo App" />
-      <View style={styles.container}></View>
-      {content}
+      <View style={styles.container}>{content}</View>
+
       <StatusBar style="auto" />
     </View>
   );

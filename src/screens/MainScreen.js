@@ -20,8 +20,4 @@ export const MainScreen = ({ addTodo, todos, removeTodo, openTodo }) => {
 
 const styles = StyleSheet.create({
   nameBlock: {},
-  container: {
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-  },
 });
