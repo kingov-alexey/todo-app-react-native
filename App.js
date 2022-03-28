@@ -7,19 +7,13 @@ import { TodoScreen } from './src/screens/TodoScreen';
 
 export default function App() {
   //стейт экранов
-  const [todoId, setTodoId] = useState('2');
+  const [todoId, setTodoId] = useState(null);
 
   //Стейт дел
   const [todos, setTodos] = useState([
     { id: '1', title: 'Выучить React Native' },
     { id: '2', title: 'Написать приложение TODO' },
-    { id: '3', title: 'test3' },
-    { id: '4', title: 'test4' },
-    { id: '5', title: 'test5' },
-    { id: '6', title: 'test6' },
-    { id: '7', title: 'test7' },
-    { id: '8', title: 'test8' },
-    { id: '9', title: 'test9' },
+
   ]);
 
   //Добавление нового элемента
