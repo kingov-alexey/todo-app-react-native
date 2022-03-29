@@ -4,6 +4,14 @@ import { StyleSheet, View, Alert } from 'react-native';
 import { Navbar } from './src/components/Navbar';
 import { MainScreen } from './src/screens/MainScreen';
 import { TodoScreen } from './src/screens/TodoScreen';
+import * as Font from 'expo-font';
+
+async function loadAppApplication() {
+  await Font.loadAsync({
+    'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
+    'roboto-bold': './assets/fonts/Roboto-Bold.ttf',
+  });
+}
 
 export default function App() {
   //стейт экранов
@@ -13,10 +21,9 @@ export default function App() {
   const [todos, setTodos] = useState([
     { id: '1', title: 'Выучить React Native' },
     { id: '2', title: 'Написать приложение TODO' },
-
   ]);
 
-  //Добавление нового элемента
+  //Create Добавление нового элемента
   const addTodo = title => {
     // const newTodo = {
     //   id: Date.now().toString(),
@@ -36,7 +43,21 @@ export default function App() {
     ]);
   };
 
-  //Удаление элемента
+  //Read чтение
+
+  //Update Редактирование элемента
+  const updateTodo = (id, title) => {
+    setTodos(old =>
+      old.map(todo => {
+        if (todo.id === id) {
+          todo.title = title;
+        }
+        return todo;
+      })
+    );
+  };
+
+  //Delete Удаление элемента
   const removeTodo = id => {
     const todo = todos.find(t => t.id === id);
     Alert.alert('Удаление элемента', `Вы уверены, что хотите удалить "${todo.title}"?`, [
@@ -53,18 +74,6 @@ export default function App() {
         },
       },
     ]);
-  };
-
-  //Редактирование элемента
-  const updateTodo = (id, title) => {
-    setTodos(old =>
-      old.map(todo => {
-        if (todo.id === id) {
-          todo.title = title;
-        }
-        return todo;
-      })
-    );
   };
 
   let content = (
