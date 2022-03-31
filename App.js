@@ -1,29 +1,46 @@
+//dll
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Alert } from 'react-native';
+import * as Font from 'expo-font';
+//import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
+
+//my
 import { Navbar } from './src/components/Navbar';
 import { MainScreen } from './src/screens/MainScreen';
 import { TodoScreen } from './src/screens/TodoScreen';
-import * as Font from 'expo-font';
 
-async function loadAppApplication() {
+async function loadApplication() {
   await Font.loadAsync({
     'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
-    'roboto-bold': './assets/fonts/Roboto-Bold.ttf',
+    'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
+    'lobster': require('./assets/fonts/Lobster-Regular.ttf'),
   });
 }
 
 export default function App() {
+  //Готовности загрузки необходимого минимума
+  const [isReady, setIsReady] = useState(false);
   //стейт экранов
   const [todoId, setTodoId] = useState(null);
-
   //Стейт дел
   const [todos, setTodos] = useState([
     { id: '1', title: 'Выучить React Native' },
     { id: '2', title: 'Написать приложение TODO' },
   ]);
 
-  //Create Добавление нового элемента
+  if (!isReady) {
+    return (
+      <AppLoading
+        startAsync={loadApplication}
+        onError={err => console.log(err)}
+        onFinish={() => setIsReady(true)}
+      />
+    );
+  }
+
+  //CREATE Добавление нового элемента
   const addTodo = title => {
     // const newTodo = {
     //   id: Date.now().toString(),
@@ -43,9 +60,9 @@ export default function App() {
     ]);
   };
 
-  //Read чтение
+  //READ чтение
 
-  //Update Редактирование элемента
+  //UPDATE Редактирование элемента
   const updateTodo = (id, title) => {
     setTodos(old =>
       old.map(todo => {
@@ -57,7 +74,7 @@ export default function App() {
     );
   };
 
-  //Delete Удаление элемента
+  //DELETE Удаление элемента
   const removeTodo = id => {
     const todo = todos.find(t => t.id === id);
     Alert.alert('Удаление элемента', `Вы уверены, что хотите удалить "${todo.title}"?`, [
