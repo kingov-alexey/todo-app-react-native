@@ -25,10 +25,7 @@ export default function App() {
   //стейт экранов
   const [todoId, setTodoId] = useState(null);
   //Стейт дел
-  const [todos, setTodos] = useState([
-    { id: '1', title: 'Выучить React Native' },
-    { id: '2', title: 'Написать приложение TODO' },
-  ]);
+  const [todos, setTodos] = useState([]);
 
   if (!isReady) {
     return (
